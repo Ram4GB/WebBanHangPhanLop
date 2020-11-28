@@ -1,0 +1,270 @@
+@import "~antd/dist/antd.less";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap");
+
+// https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+@primary-color-bg: #1565c0; // font-color -> #ffffff
+@primary-color-bg-light: #5e92f3; // #111111
+@primary-color-bg-dark: #003c8f; //#ffffff
+
+@font-color-on-primary-color-bg-dark: #ffffff;
+@font-color-on-primary-color-bg-light: #111111;
+@font-color-on-primary-color-bg: #ffffff;
+@font-color-on-secondary-color-bg: #111111;
+@font-color-on-secondary-color-bg-light: #111111;
+
+@secondary-color-bg: #ffc107; // #111111
+@secondary-color-bg-light: #ff7d47;
+
+@border-color: rgba(156, 163, 175, 1);
+@color-border-table: #777;
+
+.container-fluid {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.card-product {
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid @border-color;
+  margin-top: 15px;
+  max-width: 310px;
+
+  & .ant-card-body {
+    padding: 12px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  &__price > div {
+    font-size: 18px;
+    color: #111;
+  }
+
+  &__price {
+    font-size: 18px;
+    color: #111;
+  }
+
+  &__description ul {
+    margin-top: 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__button-icon {
+    margin-left: 5px;
+  }
+
+  & img {
+    transition: ease all 0.5s;
+    display: block;
+    margin: auto;
+  }
+
+  &:hover img {
+    transform: translateY(-10px);
+  }
+
+  &__action-group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // &:hover {
+  //   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  // }
+}
+
+.ant-layout-header {
+  background-color: @primary-color-bg;
+}
+
+.ant-menu {
+  background-color: @primary-color-bg;
+  color: @font-color-on-primary-color-bg;
+  font-weight: bold;
+}
+
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-submenu {
+  border-bottom: none;
+  top: 0;
+}
+
+.ant-menu-horizontal {
+  border: none;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+  border: none;
+  color: @font-color-on-primary-color-bg-dark;
+  background-color: @primary-color-bg-dark;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
+  padding: 0px 10px;
+  margin: 0px;
+}
+
+header .ant-menu {
+  margin-left: 30px;
+}
+
+h2.ant-typography,
+h3.ant-typography,
+h1.ant-typography {
+  color: @primary-color-bg-dark;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: @secondary-color-bg-light;
+  color: @font-color-on-secondary-color-bg-light;
+  border: 1px solid @secondary-color-bg-light;
+}
+
+.ant-btn.ant-btn-primary:hover {
+  background-color: @secondary-color-bg;
+  color: @font-color-on-secondary-color-bg;
+  border: 1px solid @secondary-color-bg;
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  color: @secondary-color-bg;
+  border-color: @secondary-color-bg;
+}
+
+.ant-btn-dangerous:hover {
+  background: #ff4d4f;
+  color: #ffffff;
+  border: 1px solid #ff4d4f;
+}
+
+.ant-table-thead .ant-table-cell {
+  background-color: @primary-color-bg-dark;
+  color: @font-color-on-primary-color-bg-dark;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.ant-table table {
+  // border-left: 1px solid @color-border-table;
+  border: 1px solid @color-border-table;
+}
+
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > thead
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-header
+  > table
+  > thead
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-body
+  > table
+  > thead
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > tbody
+  > tr
+  > td,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-header
+  > table
+  > tbody
+  > tr
+  > td,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-body
+  > table
+  > tbody
+  > tr
+  > td,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > tfoot
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-header
+  > table
+  > tfoot
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-body
+  > table
+  > tfoot
+  > tr
+  > th,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > tfoot
+  > tr
+  > td,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-header
+  > table
+  > tfoot
+  > tr
+  > td,
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-body
+  > table
+  > tfoot
+  > tr
+  > td {
+  border-right: 1px solid @color-border-table;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid @color-border-table;
+}
+
+.ant-layout-footer {
+  background-color: @primary-color-bg-light;
+  color: @font-color-on-primary-color-bg-light;
+  font-family: "Sacramento", cursive;
+  font-size: 30px;
+}
