@@ -1,10 +1,19 @@
 @import "~antd/dist/antd.less";
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap");
 
 // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 
 * {
+  // font-family: "Work Sans", sans-serif;
+  // font-family: "Poppins", sans-serif;
   font-family: "Work Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @primary-color-bg: #1565c0; // font-color -> #ffffff
@@ -18,7 +27,7 @@
 @font-color-on-secondary-color-bg-light: #111111;
 
 @secondary-color-bg: #ffc107; // #111111
-@secondary-color-bg-light: #ff7d47;
+@secondary-color-bg-light: #fff350;
 
 @border-color: rgba(156, 163, 175, 1);
 @color-border-table: #777;
@@ -32,7 +41,7 @@
   cursor: pointer;
   border-radius: 4px;
   border: 1px solid @border-color;
-  margin-top: 15px;
+  margin-top: 20px;
   max-width: 310px;
 
   & .ant-card-body {
@@ -59,6 +68,7 @@
     margin-top: 8px;
     padding: 0;
     list-style: none;
+    font-size: 13px;
   }
 
   &__button-icon {
@@ -69,6 +79,8 @@
     transition: ease all 0.5s;
     display: block;
     margin: auto;
+    width: 120px;
+    height: 120px;
   }
 
   &:hover img {
@@ -130,7 +142,8 @@ header .ant-menu {
 
 h2.ant-typography,
 h3.ant-typography,
-h1.ant-typography {
+h1.ant-typography,
+h4.ant-typography {
   color: @primary-color-bg-dark;
 }
 
@@ -264,5 +277,55 @@ h1.ant-typography {
 .ant-layout-footer {
   background-color: @primary-color-bg-light;
   color: @font-color-on-primary-color-bg-light;
-  font-size: 30px;
+}
+
+.small-header {
+  background-color: @secondary-color-bg-light;
+  color: @font-color-on-secondary-color-bg-light;
+  justify-content: flex-end;
+  align-items: center;
+
+  & ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    cursor: pointer;
+
+    & li {
+      margin: 0px 5px;
+      font-size: 13px;
+      padding: 2px 4px;
+
+      & span {
+        margin-left: 2px;
+      }
+
+      &:hover {
+        background-color: @secondary-color-bg;
+        color: @font-color-on-secondary-color-bg;
+      }
+    }
+  }
+}
+
+.user-menu {
+  border: 1px solid @border-color;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & li {
+    padding: 14px 14px;
+    transition: 0.4s;
+    cursor: pointer;
+
+    & a {
+      color: @font-color-on-secondary-color-bg;
+    }
+
+    &:hover {
+      color: @font-color-on-secondary-color-bg;
+    }
+  }
 }

@@ -6,3 +6,14 @@ export const getProductList = () =>
     method: "GET",
     url: `${rootAPI}/Products`,
   });
+export const getProductByID = (productID: any) =>
+  Axios({
+    method: "GET",
+    url: `${rootAPI}/Products/${productID}`,
+  });
+
+export const getCategoryList = () =>
+  Axios({
+    method: "GET",
+    url: `${rootAPI}/Catalogs`,
+  });

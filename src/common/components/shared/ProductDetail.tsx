@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Col,
@@ -8,6 +8,7 @@ import {
   Form,
   InputNumber,
   Tag,
+  notification,
 } from "antd";
 import TagInStock from "./TagInStock";
 
@@ -15,15 +16,39 @@ import { regularFontSizeTitle } from "../../config";
 import NumberFormat from "./NumberFormat";
 import { IProduct } from "../../interface";
 import ZoomImage from "./ZoomImage";
+import handleError from "../../utils/handleError";
+import { getProductByID } from "../../../modules/products/services";
 
 interface IProps {
   item: IProduct;
+  productID?: any;
   handleAddToCartModal?: (value: any) => void;
 }
 
 export default function ProductDetail(props: IProps) {
-  const { item, handleAddToCartModal } = props;
-  return (
+  const { handleAddToCartModal } = props;
+  const [item, setItem] = useState<IProduct>();
+
+  useEffect(() => {
+    if (props.item) {
+      setItem(props.item);
+    } else if (props.productID) {
+      loadProduct(props.productID);
+    }
+
+    async function loadProduct(productID: any) {
+      try {
+        let result = await getProductByID(productID);
+        if (result.status === 200) {
+          setItem(result.data.data);
+        }
+      } catch (error) {
+        handleError(error, null, notification);
+      }
+    }
+  }, [item, props.item, props.productID]);
+
+  return item ? (
     <Row gutter={12}>
       <Col style={{ overflow: "hidden" }} lg={14}>
         <ZoomImage></ZoomImage>
@@ -89,5 +114,10 @@ export default function ProductDetail(props: IProps) {
         )}
       </Col>
     </Row>
-  );
+  ) : null;
 }
+
+ProductDetail.defaultProps = {
+  item: null,
+  productID: null,
+};

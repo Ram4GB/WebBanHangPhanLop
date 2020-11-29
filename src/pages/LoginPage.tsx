@@ -1,23 +1,25 @@
 import { Button, Card, Form, Input, notification, Typography } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import { largeFontSizeTitle, maxWidthForm } from "../common/config";
 import handleError from "../common/utils/handleError";
 import { loginAction } from "../modules/users/reducers";
+import { login } from "../modules/users/services";
 
-export default function AboutMe() {
+export default function Login() {
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const handleLogin = (value: any) => {
+  const handleLogin = async (value: any) => {
     // gọi api login
     try {
-      dispatch(loginAction(value));
-      notification.success({
-        message: "Đăng nhập thành công",
-      });
-      history.push("/");
+      let result = await login(value);
+      if (result.status === 200) {
+        notification.success({
+          message: "Đăng nhập thành công",
+        });
+        dispatch(loginAction(result.data.data));
+      }
+      window.Modal.hide();
     } catch (error) {
       handleError(error, null, notification);
     }
@@ -34,10 +36,10 @@ export default function AboutMe() {
       >
         <Form onFinish={handleLogin} style={{ maxWidth: maxWidthForm }}>
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Mời điền username" }]}
+            name="email"
+            rules={[{ required: true, message: "Mời điền email" }]}
           >
-            <Input placeholder="Mời điền username" />
+            <Input placeholder="Mời điền email" />
           </Form.Item>
           <Form.Item
             name="password"

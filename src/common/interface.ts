@@ -1,6 +1,10 @@
 export interface IAccount {
-  username: string;
-  password: string;
+  id: 10;
+  fullName: string;
+  address: string;
+  phoneNumber: string;
+  email: string;
+  roleName: string;
 }
 
 export interface ICombo {
@@ -26,6 +30,16 @@ export interface IProduct {
   idString: string;
 }
 
-export interface ICartItem extends IProduct {
+export interface ICartProductItem extends IProduct {
   amount: number;
+}
+
+export interface ICartComboItem extends ICombo {
+  amount: number;
+}
+
+export interface ICategory {
+  id: any;
+  catalogName: string;
+  idString: string;
 }

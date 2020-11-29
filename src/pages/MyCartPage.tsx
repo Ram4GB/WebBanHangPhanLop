@@ -19,14 +19,24 @@ import {
   vatPrice,
 } from "../common/config";
 import { IRootState } from "../modules";
-import { deleteCartAction, updateCartAction } from "../modules/users/reducers";
+import {
+  deleteCartAction,
+  deleteComboCartAction,
+  updateCartAction,
+  updateComboCartAction,
+} from "../modules/users/reducers";
 
 export default function MyCartPage() {
   const carts = useSelector((state: IRootState) => state.user.carts);
+  const comboCarts = useSelector((state: IRootState) => state.user.comboCarts);
   const dispatch = useDispatch();
 
   const handleChangeAmount = (amount: number, productID: number) => {
     dispatch(updateCartAction({ newAmount: amount, productID }));
+  };
+
+  const handleChangeAmountCombo = (amount: number, comboID: any) => {
+    dispatch(updateComboCartAction({ newAmount: amount, comboID }));
   };
 
   const handleDeleteCart = (productID: any) => {
@@ -37,6 +47,9 @@ export default function MyCartPage() {
     let total = 0;
     for (let index = 0; index < carts.length; index++) {
       total += carts[index].price * carts[index].amount;
+    }
+    for (let index = 0; index < comboCarts.length; index++) {
+      total += comboCarts[index].price * comboCarts[index].amount;
     }
     return total;
   };
@@ -57,6 +70,10 @@ export default function MyCartPage() {
       },
       width: "90%",
     });
+  };
+
+  const handleDeleteComboCart = (comboID: any) => {
+    dispatch(deleteComboCartAction({ comboID }));
   };
 
   return (
@@ -123,6 +140,7 @@ export default function MyCartPage() {
                         style={{ padding: 9 }}
                         defaultValue={record.amount}
                         max={record.inStock}
+                        min={1}
                       ></InputNumber>
                     );
                   },
@@ -169,18 +187,63 @@ export default function MyCartPage() {
               Combos
             </Typography.Title>
             <Table
+              dataSource={comboCarts}
+              rowKey={(i) => i.id}
+              pagination={{ hideOnSinglePage: true }}
               columns={[
                 {
+                  title: "STT",
+                  render: (value, record, index) => <p>{index}</p>,
+                },
+                {
                   title: "Tên Combo",
+                  dataIndex: "comboName",
+                  render: (value) => <p>{value}</p>,
                 },
                 {
                   title: "Số lượng",
+
+                  render: (record) => (
+                    <InputNumber
+                      style={{ padding: 9 }}
+                      defaultValue={record.amount}
+                      onChange={(value: any) =>
+                        handleChangeAmountCombo(value, record.id)
+                      }
+                      min={1}
+                    ></InputNumber>
+                  ),
                 },
                 {
                   title: "Giá",
+                  dataIndex: "price",
+                  render: (value) => (
+                    <NumberFormat value={value}></NumberFormat>
+                  ),
                 },
                 {
                   title: "Thành tiên",
+                  render: (record) => (
+                    <NumberFormat
+                      value={record.price * record.amount}
+                    ></NumberFormat>
+                  ),
+                },
+                {
+                  title: "Hành động",
+                  render: (record) => {
+                    return (
+                      <Popconfirm
+                        onConfirm={() => handleDeleteComboCart(record.id)}
+                        title="Bạn có chắc chắn muốn xóa"
+                      >
+                        <Button danger>
+                          <i className="fas fa-trash"></i>
+                          <span className="ml-1">Xóa</span>
+                        </Button>
+                      </Popconfirm>
+                    );
+                  },
                 },
               ]}
             ></Table>

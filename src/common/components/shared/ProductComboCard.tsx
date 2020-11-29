@@ -1,35 +1,35 @@
 import { Button, Card, Col, notification, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCartAction } from "../../../modules/users/reducers";
+import { addComboToCartAction } from "../../../modules/users/reducers";
 import { mediumFontSizeTitle } from "../../config";
-import { IProduct } from "../../interface";
+import { ICombo } from "../../interface";
 import NumberFormat from "./NumberFormat";
-import ProductDetail from "../shared/ProductDetail";
-import { getProductByID } from "../../../modules/products/services";
 import handleError from "../../utils/handleError";
+import { getComboByID } from "../../../modules/combo/services";
+import ComboDetailPage from "../../../pages/ComboDetailPage";
 
 interface IProps {
-  item: IProduct;
-  productID?: string;
+  item: ICombo;
+  comboID?: string;
   width?: string;
   styles?: any;
 }
 
-export default function ProductCard(props: IProps) {
+export default function ProductComboCard(props: IProps) {
   const dispatch = useDispatch();
-  const [item, setItem] = useState<IProduct>();
+  const [item, setItem] = useState<ICombo>();
 
   useEffect(() => {
     if (props.item) {
       setItem(props.item);
-    } else if (props.productID) {
-      loadProduct(props.productID);
+    } else if (props.comboID) {
+      loadCombo(props.comboID);
     }
 
-    async function loadProduct(productID: any) {
+    async function loadCombo(comboID: any) {
       try {
-        let result = await getProductByID(productID);
+        let result = await getComboByID(comboID);
         if (result.status === 200) {
           setItem(result.data.data);
         }
@@ -37,22 +37,13 @@ export default function ProductCard(props: IProps) {
         handleError(error, null, notification);
       }
     }
-  }, [props.item, props.productID]);
+  }, [props.comboID, props.item]);
 
   const handleAddToCart = () => {
     if (item) {
-      dispatch(addToCartAction({ ...item, amount: 1 }));
+      dispatch(addComboToCartAction({ ...item, amount: 1 }));
       notification.success({
-        message: `Bỏ 1 ${item.productName} vào giỏ hàng thành công`,
-      });
-    }
-  };
-
-  const handleAddToCartModal = (value: any) => {
-    if (item) {
-      dispatch(addToCartAction({ ...item, amount: value.amount }));
-      notification.success({
-        message: `Bỏ ${value.amount} ${item.productName} vào giỏ hàng thành công`,
+        message: `Bỏ 1 ${item.comboName} vào giỏ hàng thành công`,
       });
     }
   };
@@ -60,10 +51,10 @@ export default function ProductCard(props: IProps) {
   const handleShowInfo = () => {
     if (item) {
       window.Modal.show(
-        <ProductDetail
-          handleAddToCartModal={handleAddToCartModal}
-          item={item}
-        ></ProductDetail>,
+        <ComboDetailPage
+          isShowPageHeader={false}
+          comboID={item.id}
+        ></ComboDetailPage>,
         {
           title: (
             <Typography.Title level={mediumFontSizeTitle}>
@@ -71,13 +62,13 @@ export default function ProductCard(props: IProps) {
             </Typography.Title>
           ),
           style: {
-            maxWidth: 1000,
+            maxWidth: 1150,
             top: 20,
           },
           bodyStyle: {
             padding: "30px 80px",
           },
-          width: "90%",
+          width: "100%",
         }
       );
     }
@@ -87,10 +78,10 @@ export default function ProductCard(props: IProps) {
     <Col style={{ width: props.width, padding: "0px 15px", ...props.styles }}>
       <Card className="card-product">
         <img
-          src="https://dienmaycholon.vn/public/picture/product/product16067/product_16067_1.png"
+          src="https://media.istockphoto.com/vectors/prize-box-opening-and-exploding-with-fireworks-and-confetti-enter-to-vector-id1182693467?k=6&m=1182693467&s=612x612&w=0&h=ozv523-UbhtliIEar_NQirCiVg7SvfXkP2nyOBPYIFA="
           alt=""
         />
-        <div className="card-product__title">{item.productName}</div>
+        <div className="card-product__title">{item.comboName}</div>
         <div className="card-product__price">
           <NumberFormat value={item.price}></NumberFormat>
         </div>
@@ -116,6 +107,6 @@ export default function ProductCard(props: IProps) {
   ) : null;
 }
 
-ProductCard.defaultProps = {
+ProductComboCard.defaultProps = {
   width: "20%",
 };

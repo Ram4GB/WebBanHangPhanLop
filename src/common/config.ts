@@ -1,6 +1,6 @@
 export const largeFontSizeTitle = 1;
-export const mediumFontSizeTitle = 2;
-export const regularFontSizeTitle = 3;
+export const mediumFontSizeTitle = 3;
+export const regularFontSizeTitle = 4;
 export const maxWidthForm = 800;
 export const marginTopBetweenSection = 30;
 export const rootAPI = "http://localhost:5000/api";

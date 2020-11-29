@@ -5,9 +5,10 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../modules";
 import { logoutAction } from "../../modules/users/reducers";
+import Login from "../../pages/LoginPage";
+import Register from "../../pages/RegisterPage";
 
 const { Header, Content, Footer } = Layout;
-// const { SubMenu } = Menu;
 
 interface IProps {
   children: any;
@@ -16,7 +17,7 @@ interface IProps {
 export default function MainLayout(props: IProps) {
   const { children } = props;
   const history = useHistory();
-  const user = useSelector((state: IRootState) => state.user.account);
+  const account = useSelector((state: IRootState) => state.user.account);
   const dispatch = useDispatch();
 
   const handleSelectMenu = (value: any) => {
@@ -25,16 +26,48 @@ export default function MainLayout(props: IProps) {
       notification.success({
         message: "Đăng xuất thành công",
       });
+    } else if (value.key === "/login") {
+      window.Modal.show(<Login></Login>, {
+        width: "40%",
+        style: {
+          maxWidth: 900,
+        },
+      });
+    } else if (value.key === "/register") {
+      window.Modal.show(<Register></Register>, {
+        width: "40%",
+        style: {
+          maxWidth: 900,
+        },
+      });
     } else {
       history.push(value.key);
     }
   };
 
-  console.log(user);
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Layout className="site-layout ">
+        {/* <div style={{ display: "flex" }} className="small-header">
+          <ul>
+            <AuthRender>
+              <React.Fragment>
+                <li onClick={() => history.push("/me")}>
+                  <i className="fas fa-user"></i>
+                  <span>Thông tin cá nhân</span>
+                </li>
+                <li>
+                  <i className="fas fa-cubes"></i>
+                  <span>Đơn hàng</span>
+                </li>
+              </React.Fragment>
+            </AuthRender>
+            <li>
+              <i className="far fa-newspaper"></i>
+              <span>Tin tức</span>
+            </li>
+          </ul>
+        </div> */}
         <Header
           className="site-layout-background"
           style={{ padding: "0px 20px", display: "flex", alignItems: "center" }}
@@ -56,12 +89,17 @@ export default function MainLayout(props: IProps) {
           >
             <Menu.Item key="/">Trang chủ</Menu.Item>
             <Menu.Item key="/products">Sản phẩm</Menu.Item>
-            <Menu.Item key="/orders">Đơn hàng</Menu.Item>
+            {!account ? (
+              <>
+                <Menu.Item key="/register">Đăng ký</Menu.Item>
+                <Menu.Item key="/me/info">Đăng ký</Menu.Item>
+              </>
+            ) : null}
             <Menu.Item
               style={{ marginLeft: "auto" }}
-              key={user ? "/logout" : "login"}
+              key={account ? "/logout" : "/login"}
             >
-              {user ? "Đăng xuất" : "Đăng nhập"}
+              {account ? "Đăng xuất" : "Đăng nhập"}
             </Menu.Item>
             <Menu.Item key="/carts">
               <i className="fas fa-shopping-cart"></i>

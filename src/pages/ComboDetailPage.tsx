@@ -16,15 +16,19 @@ import handleError from "../common/utils/handleError";
 import { getComboByID } from "../modules/combo/services";
 import ProductDetail from "../common/components/shared/ProductDetail";
 import TagInStock from "../common/components/shared/TagInStock";
+import { useDispatch } from "react-redux";
+import { addComboToCartAction } from "../modules/users/reducers";
 
 interface IProps {
-  comboID: string;
+  comboID: any;
+  isShowPageHeader?: boolean;
 }
 
 export default function ComboDetailPage(props: IProps) {
   const { comboID } = props;
   const [combo, setCombo] = useState<ICombo | null>(null);
   const params = useParams<{ comboID: string }>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (comboID) {
@@ -64,9 +68,12 @@ export default function ComboDetailPage(props: IProps) {
   };
 
   const handleAddComboToCart = () => {
-    notification.success({
-      message: "Thêm combo thành công",
-    });
+    if (combo) {
+      dispatch(addComboToCartAction({ ...combo, amount: 1 }));
+      notification.success({
+        message: "Thêm combo thành công",
+      });
+    }
   };
 
   // const handleAddToCartModal = (value: any) => {
@@ -80,22 +87,26 @@ export default function ComboDetailPage(props: IProps) {
     <div className="container-fluid">
       <Card
         title={
-          <PageHeader
-            title={
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography.Title level={largeFontSizeTitle}>
-                  Thông tin chi tiết của combo {combo && combo.comboName}
-                </Typography.Title>
-              </div>
-            }
-            onBack={() => window.history.back()}
-            extra={
-              <Button onClick={handleAddComboToCart} type="primary">
-                <i className="fas fa-cart-arrow-down"></i>
-                <span className="ml-1">Thêm combo này vào giỏ</span>
-              </Button>
-            }
-          ></PageHeader>
+          props.isShowPageHeader ? (
+            <PageHeader
+              title={
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Typography.Title level={largeFontSizeTitle}>
+                    Thông tin chi tiết của combo {combo && combo.comboName}
+                  </Typography.Title>
+                </div>
+              }
+              onBack={() => window.history.back()}
+              extra={
+                <Button onClick={handleAddComboToCart} type="primary">
+                  <i className="fas fa-cart-arrow-down"></i>
+                  <span className="ml-1">Thêm combo này vào giỏ</span>
+                </Button>
+              }
+            ></PageHeader>
+          ) : null
         }
       >
         {combo && (
@@ -205,3 +216,7 @@ export default function ComboDetailPage(props: IProps) {
     </div>
   );
 }
+
+ComboDetailPage.defaultProps = {
+  isShowPageHeader: true,
+};
