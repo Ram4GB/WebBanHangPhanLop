@@ -42,6 +42,7 @@ export const updateComboCartAction = createAction<{
 export const deleteComboCartAction = createAction<{
   comboID: any;
 }>(`${MODULE_NAME}_DELETE_COMBO_CART`);
+export const clearCart = createAction(`${MODULE_NAME}_CLEAR_CART`);
 
 export default createReducer<IUserState>(initialValue, (builder) => {
   builder
@@ -141,5 +142,9 @@ export default createReducer<IUserState>(initialValue, (builder) => {
           ...state.comboCarts.slice(index + 1),
         ];
       }
+    })
+    .addCase(clearCart, (state, action) => {
+      state.carts = [];
+      state.comboCarts = [];
     });
 });

@@ -32,12 +32,18 @@ export const updateUser = (
   userID: any
 ) => Axios.put(`${rootAPI}/User/${userID}`, data);
 
-export const getMe = (userID: any) => Axios.get(`${rootAPI}/User/${userID}`);
-
 export const updateUserPassword = (
   data: {
     oldPassword: "string";
     newPassword: "string";
   },
   userID: any
-) => Axios.put(`${rootAPI}/User/${userID}`, data);
+) => Axios.put(`${rootAPI}/User/${userID}/UpdatePassword`, data);
+
+export const getUserProfile = (userID: any) =>
+  Axios.get(`${rootAPI}/User/${userID}`);
+
+export const createOrder = (data: any) => Axios.post(`${rootAPI}/Orders`, data);
+
+export const getOrderDetail = (orderID: any) =>
+  Axios.get(`${rootAPI}/Orders/${orderID}`);

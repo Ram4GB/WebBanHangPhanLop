@@ -1,7 +1,7 @@
 import { Button, Card, Form, Input, notification, Typography } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React from "react";
-import { largeFontSizeTitle, maxWidthForm } from "../common/config";
+import { largeFontSizeTitle, maxWidthForm, roleName } from "../common/config";
 import handleError from "../common/utils/handleError";
 import { registerUser } from "../modules/users/services";
 
@@ -19,7 +19,7 @@ export default function Regsiter() {
     // gọi api login
     try {
       delete value.prePassword;
-      let result = await registerUser({ ...value, roleName: "Customer" });
+      let result = await registerUser({ ...value, roleName: roleName });
       if (result.status === 201) {
         notification.success({
           message: "Tạo tài khoản thành công",

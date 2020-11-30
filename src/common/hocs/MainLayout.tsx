@@ -46,7 +46,7 @@ export default function MainLayout(props: IProps) {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <Layout className="site-layout ">
         {/* <div style={{ display: "flex" }} className="small-header">
           <ul>
@@ -92,9 +92,10 @@ export default function MainLayout(props: IProps) {
             {!account ? (
               <>
                 <Menu.Item key="/register">Đăng ký</Menu.Item>
-                <Menu.Item key="/me/info">Đăng ký</Menu.Item>
               </>
-            ) : null}
+            ) : (
+              <Menu.Item key="/me/info">Thông tin của tôi</Menu.Item>
+            )}
             <Menu.Item
               style={{ marginLeft: "auto" }}
               key={account ? "/logout" : "/login"}
@@ -107,7 +108,14 @@ export default function MainLayout(props: IProps) {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ width: "100%", margin: "auto" }}>
+        <Content
+          style={{
+            width: "88%",
+            margin: "auto",
+            minHeight: "96vh",
+            backgroundColor: "#fff",
+          }}
+        >
           <div className="site-layout-background">{children}</div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Web bán hàng mini</Footer>

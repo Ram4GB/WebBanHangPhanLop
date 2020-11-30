@@ -11,6 +11,7 @@ import {
 } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CheckoutForm from "../common/components/shared/CheckoutForm";
 import NumberFormat from "../common/components/shared/NumberFormat";
 import ProductDetail from "../common/components/shared/ProductDetail";
 import {
@@ -74,6 +75,18 @@ export default function MyCartPage() {
 
   const handleDeleteComboCart = (comboID: any) => {
     dispatch(deleteComboCartAction({ comboID }));
+  };
+
+  const handleCheckout = () => {
+    window.Modal.show(
+      <CheckoutForm cost={handleGetTotalPrice()}></CheckoutForm>,
+      {
+        title: <Typography.Title>Thanh toán</Typography.Title>,
+        style: {
+          top: 20,
+        },
+      }
+    );
   };
 
   return (
@@ -268,13 +281,16 @@ export default function MyCartPage() {
               <div style={{ fontSize: 30 }}>
                 <NumberFormat value={vatPrice}></NumberFormat>
               </div>
-              <Button
-                size="large"
-                style={{ width: "100%", maxWidth: 500 }}
-                type="primary"
-              >
-                <span>Thanh toán ngay</span>
-              </Button>
+              {carts.length === 0 && comboCarts.length === 0 ? null : (
+                <Button
+                  size="large"
+                  style={{ width: "100%", maxWidth: 500 }}
+                  type="primary"
+                  onClick={handleCheckout}
+                >
+                  <span>Thanh toán ngay</span>
+                </Button>
+              )}
             </div>
           </Card>
         </Col>

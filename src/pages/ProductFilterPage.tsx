@@ -186,13 +186,13 @@ export default function ProductFilterPage() {
                 <Form.Item
                   label={
                     <Typography.Title level={regularFontSizeTitle}>
-                      Tên sản phẩm/combo:
+                      Tên tìm kiếm
                     </Typography.Title>
                   }
                   name="productName"
                 >
                   <Input
-                    style={{ width: 250 }}
+                    style={{ width: "100%", maxWidth: 300 }}
                     placeholder="Mời điền tên sản phẩm/combo"
                   />
                 </Form.Item>
@@ -205,7 +205,7 @@ export default function ProductFilterPage() {
                   }
                 >
                   <Select
-                    style={{ width: 250 }}
+                    style={{ width: "100%", maxWidth: 300 }}
                     placeholder="Mời điền tên sản phẩm"
                     allowClear
                     mode="multiple"
@@ -232,7 +232,7 @@ export default function ProductFilterPage() {
                     >
                       <InputNumber
                         min={1}
-                        style={{ width: 120 }}
+                        style={{ width: "100%", maxWidth: 120 }}
                         placeholder="Từ"
                       ></InputNumber>
                     </Form.Item>
@@ -248,7 +248,7 @@ export default function ProductFilterPage() {
                     >
                       <InputNumber
                         min={1}
-                        style={{ width: 120 }}
+                        style={{ width: "100%", maxWidth: 120 }}
                         placeholder="Đến"
                       ></InputNumber>
                     </Form.Item>

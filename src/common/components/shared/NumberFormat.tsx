@@ -9,7 +9,7 @@ interface IProps {
 export default function NumberFormat(props: IProps) {
   return (
     <React.Fragment>
-      {numeral(props.value).format("0,0")} {props.currency}
+      {props.value ? numeral(props.value).format("0,0") : "0"} {props.currency}
     </React.Fragment>
   );
 }
