@@ -129,7 +129,17 @@ body.dark {
   }
 
   .ant-layout-header.hide {
-    display: none !important;
+    animation: faded 1s forwards;
+  }
+
+  @keyframes faded {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: block;
+    }
   }
 
   .ant-layout-content {

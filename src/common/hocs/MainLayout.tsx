@@ -41,6 +41,8 @@ export default function MainLayout(props: IProps) {
   const comboCarts = useSelector((state: IRootState) => state.user.comboCarts);
   const mode = useSelector((state: IRootState) => state.user.mode);
 
+  const [timer, setTimer] = useState<any>();
+
   const handleSelectMenu = (value: any) => {
     if (value.key === "/logout") {
       dispatch(logoutAction());
@@ -71,11 +73,26 @@ export default function MainLayout(props: IProps) {
   const handleCroll = useCallback(
     (e: any) => {
       let current = document.documentElement.scrollTop;
+
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      let tickyTime = setTimeout(() => {
+        document
+          .querySelectorAll(".ant-layout-header")[0]
+          .classList.remove("hide");
+      }, 1000);
+
+      setTimer(tickyTime);
+
       if (current > previousPositionScroll) {
         document
           .querySelectorAll(".ant-layout-header")[0]
           .classList.add("hide");
         setPreviousPositionScroll(current);
+
+        // đợi khoảng 1s xuất hiện cái header
       } else {
         document
           .querySelectorAll(".ant-layout-header")[0]
@@ -83,7 +100,7 @@ export default function MainLayout(props: IProps) {
         setPreviousPositionScroll(current);
       }
     },
-    [previousPositionScroll]
+    [previousPositionScroll, timer]
   );
 
   useEffect(() => {
