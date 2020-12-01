@@ -85,7 +85,10 @@ export default function ProductCard(props: IProps) {
   };
 
   return item ? (
-    <Col style={{ width: props.width, padding: "0px 15px", ...props.styles }}>
+    <Col
+      className="col-card-custom"
+      style={{ width: props.width, padding: "0px 15px", ...props.styles }}
+    >
       <Card className="card-product">
         <img src={productImage} alt="" />
         <div className="card-product__title">{item.productName}</div>

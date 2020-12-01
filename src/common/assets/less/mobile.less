@@ -1,0 +1,98 @@
+.max-width-900 {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .ant-carousel .image-carousel {
+    height: 300px !important;
+    background-size: contain;
+  }
+
+  .col-card-custom {
+    width: 100% !important;
+    max-width: none !important;
+    margin-bottom: 20px !important;
+
+    & .card-product {
+      width: 100% !important;
+      max-width: none !important;
+
+      & img {
+        height: 150px !important;
+        width: 150px !important;
+      }
+    }
+  }
+
+  .ant-layout-header {
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    border: 1px solid #ffffff;
+    padding: 0 !important;
+    transition: 0.5s;
+    width: 0 !important;
+
+    & .ant-menu {
+      flex-direction: column;
+      margin-left: 0 !important;
+      padding: 0 !important;
+      overflow: hidden;
+
+      & .ant-menu-item {
+        text-align: center;
+        margin-left: 0px !important;
+      }
+
+      & > * {
+        text-align: center;
+      }
+    }
+
+    &.hide {
+      width: 0;
+    }
+
+    &.show {
+      width: 24vw !important;
+    }
+  }
+
+  .ant-menu-inline,
+  .ant-menu-vertical,
+  .ant-menu-vertical-left {
+    border-right: none;
+  }
+
+  .max-width-900 {
+    display: block;
+  }
+
+  body main.ant-layout-content {
+    margin-top: 0px !important;
+    transition: 0.5s;
+  }
+
+  body main.ant-layout-content.isShowNavbar {
+    margin-left: 24vw !important;
+    width: 100vw - 24vw;
+  }
+
+  .ant-back-top {
+    right: 0px !important;
+  }
+
+  .affix-mobile {
+    display: block;
+  }
+
+  .ant-modal {
+    width: 90% !important;
+    max-width: none !important;
+    top: 30px;
+  }
+}

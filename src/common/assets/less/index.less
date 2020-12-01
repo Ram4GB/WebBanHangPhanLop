@@ -129,7 +129,7 @@ body.dark {
   }
 
   .ant-layout-header.hide {
-    animation: faded 1s forwards;
+    animation: faded 0.5s forwards;
   }
 
   @keyframes faded {
@@ -143,8 +143,12 @@ body.dark {
   }
 
   .ant-layout-content {
-    margin-top: 64px !important;
+    margin: auto;
+    margin-top: 64px;
     background-color: @bg-content;
+    width: 88%;
+    padding: 10px;
+    min-height: 96vh;
   }
 
   .ant-menu {
@@ -386,5 +390,9 @@ body.dark {
   .card-combo {
     border: 1px solid @border-color;
     overflow: hidden;
+  }
+
+  .affix-mobile {
+    display: none;
   }
 }

@@ -70,6 +70,8 @@ export default function OrderDetailOfUser(props: IProps) {
             Sản phẩm
           </Typography.Title>
           <Table
+            rowKey={(i) => i.id}
+            scroll={{ x: "100%" }}
             dataSource={order.products}
             columns={[
               {
@@ -131,6 +133,8 @@ export default function OrderDetailOfUser(props: IProps) {
         <>
           <Typography.Title level={mediumFontSizeTitle}>Combo</Typography.Title>
           <Table
+            scroll={{ x: "100%" }}
+            rowKey={(i) => i.id}
             dataSource={order.combos || []}
             columns={[
               {

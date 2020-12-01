@@ -10,17 +10,28 @@ import {
   Row,
   Switch,
 } from "antd";
-import { ShoppingCartOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  SettingOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 import logo from "../../logo.svg";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../modules";
-import { logoutAction, toggleMode } from "../../modules/users/reducers";
+import {
+  logoutAction,
+  toggleMode,
+  toggleNavbarMobile,
+} from "../../modules/users/reducers";
 import Login from "../../pages/LoginPage";
 import Register from "../../pages/RegisterPage";
 import Avatar from "antd/lib/avatar/avatar";
 import sun from "../assets/images/svg/sun.svg";
 import moon from "../assets/images/svg/moon.svg";
+import useMediaQuery from "../components/shared/useMediaQuery";
+import { mobileWidth } from "../config";
+import MyAffix from "../components/shared/MyAffix";
 
 const { Header, Content, Footer } = Layout;
 
@@ -40,6 +51,11 @@ export default function MainLayout(props: IProps) {
   const carts = useSelector((state: IRootState) => state.user.carts);
   const comboCarts = useSelector((state: IRootState) => state.user.comboCarts);
   const mode = useSelector((state: IRootState) => state.user.mode);
+  const isShowNavbar = useSelector(
+    (state: IRootState) => state.user.mobile.isShowNavbar
+  );
+
+  const [media] = useMediaQuery();
 
   const [timer, setTimer] = useState<any>();
 
@@ -103,14 +119,17 @@ export default function MainLayout(props: IProps) {
     [previousPositionScroll, timer]
   );
 
+  // bắt sự kiện khi scroll
   useEffect(() => {
-    window.addEventListener("scroll", handleCroll);
-    setPreviousPositionScroll(document.documentElement.scrollTop);
+    if (media && media.width > mobileWidth) {
+      window.addEventListener("scroll", handleCroll);
+      setPreviousPositionScroll(document.documentElement.scrollTop);
+    }
     return () => {
       window.removeEventListener("scroll", handleCroll);
       setPreviousPositionScroll(0);
     };
-  }, [handleCroll]);
+  }, [handleCroll, media]);
 
   const handleToggleMode = (value: any) => {
     // true -> light
@@ -118,6 +137,7 @@ export default function MainLayout(props: IProps) {
     dispatch(toggleMode());
   };
 
+  // thay đổi theme
   useEffect(() => {
     if (mode === "light") {
       document.body.classList.remove("dark");
@@ -128,33 +148,15 @@ export default function MainLayout(props: IProps) {
     }
   }, [mode]);
 
-  console.log(mode);
+  const handleClickShowNavbar = () => {
+    dispatch(toggleNavbarMobile());
+  };
 
   return (
     <Layout>
       <Layout className={`site-layout`}>
-        {/* <div style={{ display: "flex" }} className="small-header">
-          <ul>
-            <AuthRender>
-              <React.Fragment>
-                <li onClick={() => history.push("/me")}>
-                  <i className="fas fa-user"></i>
-                  <span>Thông tin cá nhân</span>
-                </li>
-                <li>
-                  <i className="fas fa-cubes"></i>
-                  <span>Đơn hàng</span>
-                </li>
-              </React.Fragment>
-            </AuthRender>
-            <li>
-              <i className="far fa-newspaper"></i>
-              <span>Tin tức</span>
-            </li>
-          </ul>
-        </div> */}
         <Header
-          className="site-layout-background"
+          className={`site-layout-background ${isShowNavbar ? "show" : "hide"}`}
           style={{ padding: "0px 20px", display: "flex", alignItems: "center" }}
           ref={contentRef}
         >
@@ -169,7 +171,9 @@ export default function MainLayout(props: IProps) {
 
           <Menu
             style={{ flex: 1, display: "flex" }}
-            mode="horizontal"
+            mode={
+              media && media.width > mobileWidth ? "horizontal" : "vertical"
+            }
             defaultSelectedKeys={["2"]}
             onClick={handleSelectMenu}
           >
@@ -261,14 +265,7 @@ export default function MainLayout(props: IProps) {
             </Dropdown>
           </Menu>
         </Header>
-        <Content
-          style={{
-            width: "88%",
-            padding: 10,
-            margin: "auto",
-            minHeight: "96vh",
-          }}
-        >
+        <Content className={isShowNavbar ? "isShowNavbar" : ""}>
           <div className="site-layout-background">{children}</div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -277,6 +274,9 @@ export default function MainLayout(props: IProps) {
         </Footer>
       </Layout>
       <BackTop style={{ right: 30 }}></BackTop>
+      <MyAffix onClick={handleClickShowNavbar} style={{ bottom: 5, right: 0 }}>
+        <UnorderedListOutlined />
+      </MyAffix>
     </Layout>
   );
 }

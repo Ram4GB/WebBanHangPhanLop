@@ -76,7 +76,10 @@ export default function ProductComboCard(props: IProps) {
   };
 
   return item ? (
-    <Col style={{ width: props.width, padding: "0px 15px", ...props.styles }}>
+    <Col
+      className="col-card-custom"
+      style={{ width: props.width, padding: "0px 15px", ...props.styles }}
+    >
       <Card className="card-product">
         <img src={comboImage} alt="" />
         <div className="card-product__title">{item.comboName}</div>

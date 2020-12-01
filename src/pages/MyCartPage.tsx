@@ -102,6 +102,7 @@ export default function MyCartPage() {
               Sản phẩm
             </Typography.Title>
             <Table
+              scroll={{ x: "100%" }}
               style={{ cursor: "pointer" }}
               dataSource={carts}
               rowKey={(i) => i.id}
@@ -201,6 +202,7 @@ export default function MyCartPage() {
               Combos
             </Typography.Title>
             <Table
+              scroll={{ x: "100%" }}
               dataSource={comboCarts}
               rowKey={(i) => i.id}
               pagination={{ hideOnSinglePage: true }}

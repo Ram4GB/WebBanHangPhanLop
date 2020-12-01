@@ -143,6 +143,7 @@ export default function ComboDetailPage(props: IProps) {
               </span>
             </div>
             <Table
+              scroll={{ x: "100%" }}
               style={{ cursor: "pointer" }}
               dataSource={combo.products}
               rowKey={(i) => i.id}

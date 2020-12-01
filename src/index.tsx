@@ -7,6 +7,7 @@ import Root from "./common/hocs/Root";
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./common/assets/less/index.less";
+import "./common/assets/less/mobile.less";
 import { PERSIST, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 

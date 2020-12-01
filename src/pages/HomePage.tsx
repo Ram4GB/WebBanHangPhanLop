@@ -28,6 +28,7 @@ export default function HiAdminPage() {
         <Carousel autoplay>
           <div>
             <div
+              className="image-carousel"
               style={{
                 width: "100%",
                 height: 500,
@@ -41,6 +42,7 @@ export default function HiAdminPage() {
           </div>
           <div>
             <div
+              className="image-carousel"
               style={{
                 width: "100%",
                 height: 500,
@@ -54,6 +56,7 @@ export default function HiAdminPage() {
           </div>
           <div>
             <div
+              className="image-carousel"
               style={{
                 width: "100%",
                 height: 500,

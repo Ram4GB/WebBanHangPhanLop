@@ -61,6 +61,7 @@ export default function UserOrderPage() {
         }
       >
         <Table
+          scroll={{ x: "100%" }}
           dataSource={orders}
           rowKey={(i) => i.id}
           pagination={{

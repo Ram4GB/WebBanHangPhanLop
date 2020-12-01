@@ -7,6 +7,7 @@ export const rootAPI = "http://localhost:5000/api";
 export const vatPrice = 0;
 export const roleName = "Customer";
 export const formatTimeStamp = "DD/MM/YYYY";
+export const mobileWidth = 900;
 
 export const url = {
   comboDetail: (comboID: number) => `/combo/${comboID}`,

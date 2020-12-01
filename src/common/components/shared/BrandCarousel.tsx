@@ -2,8 +2,12 @@ import React from "react";
 import AdvanceCarousel from "react-elastic-carousel";
 
 export default function BrandCarousel() {
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 900, itemsToShow: 4 },
+  ];
   return (
-    <AdvanceCarousel itemsToShow={6}>
+    <AdvanceCarousel breakPoints={breakPoints} itemsToShow={6}>
       <div>
         <img
           style={{ width: 80, height: 80 }}

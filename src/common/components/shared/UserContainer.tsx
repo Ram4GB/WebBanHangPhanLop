@@ -9,7 +9,7 @@ export default function UserContainer(props: IProps) {
   return (
     <div style={{ height: "100%" }} className="container-fluid">
       <Row gutter={12} style={{ height: "100%" }}>
-        <Col lg={4}>
+        <Col xs={24} md={24} sm={24} lg={4}>
           <Card bodyStyle={{ padding: 0 }}>
             <ul className="user-menu">
               <Link to="/me/info">
@@ -24,7 +24,9 @@ export default function UserContainer(props: IProps) {
             </ul>
           </Card>
         </Col>
-        <Col lg={20}>{props.children}</Col>
+        <Col xs={24} md={24} sm={24} lg={20}>
+          {props.children}
+        </Col>
       </Row>
     </div>
   );

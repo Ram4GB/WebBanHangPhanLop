@@ -38,7 +38,7 @@ export default function ComboList() {
 const ComboItem = (props: { item: ICombo }) => {
   const { item } = props;
   return (
-    <Col style={{ maxWidth: 300 }} lg={4}>
+    <Col style={{ maxWidth: 300 }} className="col-card-custom" lg={4}>
       <Card
         bodyStyle={{ padding: 5 }}
         style={{ cursor: "pointer" }}

@@ -16,6 +16,9 @@ export interface IUserState {
   comboCarts: Array<ICartComboItem>;
   lang: string;
   mode: MODE;
+  mobile: {
+    isShowNavbar: boolean;
+  };
 }
 
 const initialValue: IUserState = {
@@ -24,6 +27,9 @@ const initialValue: IUserState = {
   comboCarts: [],
   lang: "vi_VN",
   mode: MODE.light,
+  mobile: {
+    isShowNavbar: false,
+  },
 };
 
 export const loginAction = createAction<IAccount>(`${MODULE_NAME}_LOGIN`);
@@ -53,6 +59,9 @@ export const deleteComboCartAction = createAction<{
 export const clearCart = createAction(`${MODULE_NAME}_CLEAR_CART`);
 export const setLang = createAction<string>(`${MODULE_NAME}_SET_LANG`);
 export const toggleMode = createAction(`${MODULE_NAME}_TOGGLE_MODE`);
+export const toggleNavbarMobile = createAction(
+  `${MODULE_NAME}_TOGGLE_NAVBAR_MOBILE`
+);
 
 export default createReducer<IUserState>(initialValue, (builder) => {
   builder
@@ -166,5 +175,8 @@ export default createReducer<IUserState>(initialValue, (builder) => {
       } else {
         state.mode = MODE.light;
       }
+    })
+    .addCase(toggleNavbarMobile, (state, action) => {
+      state.mobile.isShowNavbar = !state.mobile.isShowNavbar;
     });
 });

@@ -180,7 +180,7 @@ export default function ProductFilterPage() {
           style={{ marginTop: marginTopBetweenSection / 2, padding: 0 }}
           gutter={12}
         >
-          <Col lg={5}>
+          <Col xs={24} sm={24} md={24} lg={5}>
             <Card style={{ height: "100%" }}>
               <Form form={form} onFinish={handleSubmitFilter} layout="vertical">
                 <Form.Item
@@ -280,7 +280,7 @@ export default function ProductFilterPage() {
               </Form>
             </Card>
           </Col>
-          <Col lg={19}>
+          <Col xs={24} sm={24} md={24} lg={19}>
             <Card>
               <p>Tổng sản phẩm: {combinationArray?.length} sản phẩm</p>
               <Row>
