@@ -6,16 +6,24 @@ import {
 } from "../../common/interface";
 import { MODULE_NAME } from "./models";
 
+enum MODE {
+  light = "light",
+  dark = "dark",
+}
 export interface IUserState {
   account: IAccount | null;
   carts: Array<ICartProductItem>;
   comboCarts: Array<ICartComboItem>;
+  lang: string;
+  mode: MODE;
 }
 
 const initialValue: IUserState = {
   account: null,
   carts: [],
   comboCarts: [],
+  lang: "vi_VN",
+  mode: MODE.light,
 };
 
 export const loginAction = createAction<IAccount>(`${MODULE_NAME}_LOGIN`);
@@ -43,6 +51,8 @@ export const deleteComboCartAction = createAction<{
   comboID: any;
 }>(`${MODULE_NAME}_DELETE_COMBO_CART`);
 export const clearCart = createAction(`${MODULE_NAME}_CLEAR_CART`);
+export const setLang = createAction<string>(`${MODULE_NAME}_SET_LANG`);
+export const toggleMode = createAction(`${MODULE_NAME}_TOGGLE_MODE`);
 
 export default createReducer<IUserState>(initialValue, (builder) => {
   builder
@@ -146,5 +156,15 @@ export default createReducer<IUserState>(initialValue, (builder) => {
     .addCase(clearCart, (state, action) => {
       state.carts = [];
       state.comboCarts = [];
+    })
+    .addCase(setLang, (state, action) => {
+      state.lang = action.payload;
+    })
+    .addCase(toggleMode, (state, action) => {
+      if (state.mode === MODE.light) {
+        state.mode = MODE.dark;
+      } else {
+        state.mode = MODE.light;
+      }
     });
 });

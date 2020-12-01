@@ -18,6 +18,7 @@ import ProductDetail from "../common/components/shared/ProductDetail";
 import TagInStock from "../common/components/shared/TagInStock";
 import { useDispatch } from "react-redux";
 import { addComboToCartAction } from "../modules/users/reducers";
+import productImage from "../common/assets/images/products/product.png";
 
 interface IProps {
   comboID: any;
@@ -164,7 +165,7 @@ export default function ComboDetailPage(props: IProps) {
                       <img
                         style={{ width: 80, height: 80 }}
                         alt=""
-                        src="https://dienmaycholon.vn/public/picture/product/product16067/product_16067_1.png"
+                        src={productImage}
                       />
                     );
                   },

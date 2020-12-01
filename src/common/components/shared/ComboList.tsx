@@ -2,8 +2,9 @@ import { Card, Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getComboList } from "../../../modules/combo/services";
-import { borderColor, url } from "../../config";
+import { url } from "../../config";
 import { ICombo } from "../../interface";
+import comboImage from "../../assets/images/products/combo.png";
 
 export default function ComboList() {
   const [comboList, setComboList] = useState<Array<ICombo>>([]);
@@ -40,7 +41,8 @@ const ComboItem = (props: { item: ICombo }) => {
     <Col style={{ maxWidth: 300 }} lg={4}>
       <Card
         bodyStyle={{ padding: 5 }}
-        style={{ border: borderColor, borderRadius: 4, cursor: "pointer" }}
+        style={{ cursor: "pointer" }}
+        className="card-combo"
       >
         <div>
           <img
@@ -50,7 +52,7 @@ const ComboItem = (props: { item: ICombo }) => {
               display: "block",
               margin: "auto",
             }}
-            src="https://media.istockphoto.com/vectors/prize-box-opening-and-exploding-with-fireworks-and-confetti-enter-to-vector-id1182693467?k=6&m=1182693467&s=612x612&w=0&h=ozv523-UbhtliIEar_NQirCiVg7SvfXkP2nyOBPYIFA="
+            src={comboImage}
             alt=""
           />
           <p

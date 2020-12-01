@@ -6,6 +6,7 @@ import handleError from "../../utils/handleError";
 import DateFormat from "./DateFormat";
 import NumberFormat from "./NumberFormat";
 import StatusOrder from "./StatusOrder";
+import productImage from "../../assets/images/products/product.png";
 
 interface IProps {
   orderID: string;
@@ -86,7 +87,7 @@ export default function OrderDetailOfUser(props: IProps) {
                     <img
                       style={{ width: 80, height: 80 }}
                       alt=""
-                      src="https://dienmaycholon.vn/public/picture/product/product16067/product_16067_1.png"
+                      src={productImage}
                     />
                   );
                 },

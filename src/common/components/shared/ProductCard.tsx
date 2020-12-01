@@ -8,6 +8,7 @@ import NumberFormat from "./NumberFormat";
 import ProductDetail from "../shared/ProductDetail";
 import { getProductByID } from "../../../modules/products/services";
 import handleError from "../../utils/handleError";
+import productImage from "../../assets/images/products/product.png";
 
 interface IProps {
   item: IProduct;
@@ -86,10 +87,7 @@ export default function ProductCard(props: IProps) {
   return item ? (
     <Col style={{ width: props.width, padding: "0px 15px", ...props.styles }}>
       <Card className="card-product">
-        <img
-          src="https://dienmaycholon.vn/public/picture/product/product16067/product_16067_1.png"
-          alt=""
-        />
+        <img src={productImage} alt="" />
         <div className="card-product__title">{item.productName}</div>
         <div className="card-product__price">
           <NumberFormat value={item.price}></NumberFormat>

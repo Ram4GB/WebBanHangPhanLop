@@ -8,6 +8,7 @@ import NumberFormat from "./NumberFormat";
 import handleError from "../../utils/handleError";
 import { getComboByID } from "../../../modules/combo/services";
 import ComboDetailPage from "../../../pages/ComboDetailPage";
+import comboImage from "../../assets/images/products/combo.png";
 
 interface IProps {
   item: ICombo;
@@ -77,10 +78,7 @@ export default function ProductComboCard(props: IProps) {
   return item ? (
     <Col style={{ width: props.width, padding: "0px 15px", ...props.styles }}>
       <Card className="card-product">
-        <img
-          src="https://media.istockphoto.com/vectors/prize-box-opening-and-exploding-with-fireworks-and-confetti-enter-to-vector-id1182693467?k=6&m=1182693467&s=612x612&w=0&h=ozv523-UbhtliIEar_NQirCiVg7SvfXkP2nyOBPYIFA="
-          alt=""
-        />
+        <img src={comboImage} alt="" />
         <div className="card-product__title">{item.comboName}</div>
         <div className="card-product__price">
           <NumberFormat value={item.price}></NumberFormat>

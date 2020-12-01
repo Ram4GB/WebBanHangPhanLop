@@ -19,6 +19,11 @@ import HomePageProductList from "../common/components/shared/HomePageProductList
 export default function HiAdminPage() {
   return (
     <div className="container-fluid">
+      <div className="wrapper">
+        <span aria-label="" role="img" className="marquee">
+          🔥🔥🔥 Săn giá cực sock cùng Mini 🔥🔥🔥
+        </span>
+      </div>
       <Card bodyStyle={{ padding: 0 }}>
         <Carousel autoplay>
           <div>

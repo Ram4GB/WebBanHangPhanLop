@@ -26,6 +26,7 @@ import {
   updateCartAction,
   updateComboCartAction,
 } from "../modules/users/reducers";
+import productImage from "../common/assets/images/products/product.png";
 
 export default function MyCartPage() {
   const carts = useSelector((state: IRootState) => state.user.carts);
@@ -123,7 +124,7 @@ export default function MyCartPage() {
                       <img
                         style={{ width: 80, height: 80 }}
                         alt=""
-                        src="https://dienmaycholon.vn/public/picture/product/product16067/product_16067_1.png"
+                        src={productImage}
                       />
                     );
                   },
