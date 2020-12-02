@@ -1,4 +1,5 @@
 import { Button, Card, Form, Input, notification, Typography } from "antd";
+import { useForm } from "antd/lib/form/Form";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { largeFontSizeTitle, maxWidthForm } from "../common/config";
@@ -8,6 +9,7 @@ import { login } from "../modules/users/services";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const [form] = useForm();
 
   const handleLogin = async (value: any) => {
     // gọi api login
@@ -21,7 +23,7 @@ export default function Login() {
       }
       window.Modal.hide();
     } catch (error) {
-      handleError(error, null, notification);
+      handleError(error, form, notification);
     }
   };
 
@@ -34,7 +36,11 @@ export default function Login() {
           </Typography.Title>
         }
       >
-        <Form onFinish={handleLogin} style={{ maxWidth: maxWidthForm }}>
+        <Form
+          form={form}
+          onFinish={handleLogin}
+          style={{ maxWidth: maxWidthForm }}
+        >
           <Form.Item
             name="email"
             rules={[{ required: true, message: "Mời điền email" }]}

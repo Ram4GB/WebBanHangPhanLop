@@ -46,7 +46,7 @@ export default function UserPage() {
         }
       }
     } catch (error) {
-      handleError(error, null, notification);
+      handleError(error, form, notification);
     }
   };
 

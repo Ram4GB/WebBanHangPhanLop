@@ -206,6 +206,7 @@ export default function MainLayout(props: IProps) {
             <Dropdown
               overlay={
                 <Menu style={{ width: 180 }}>
+                  <Menu.Item>Chào, {account?.fullName}</Menu.Item>
                   <Menu.Item
                     onClick={() =>
                       notification.info({

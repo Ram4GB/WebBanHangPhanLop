@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { IRootState } from "../../modules";
 import ChangePasswordPage from "../../pages/ChangePasswordPage";
 import ComboDetailPage from "../../pages/ComboDetailPage";
 import HomePage from "../../pages/HomePage";
@@ -10,9 +12,9 @@ import UserOrderPage from "../../pages/UserOrderPage";
 import UserPage from "../../pages/UserPage";
 
 export default function Routes() {
-  const user = { role: "admin" };
+  const account = useSelector((state: IRootState) => state.user.account);
 
-  if (user.role === "admin") {
+  if (account) {
     return (
       <Switch>
         <Route component={HomePage} path="/" exact />
@@ -29,7 +31,15 @@ export default function Routes() {
         <Route component={NotFoundPage} path="*" exact />
       </Switch>
     );
+  } else {
+    return (
+      <Switch>
+        <Route component={HomePage} path="/" exact />
+        <Route component={MyCartPage} path="/carts" exact />
+        <Route component={ComboDetailPage} path="/combo/:comboID" exact />
+        <Route component={ProductFilterPage} path="/products" exact />
+        <Route component={NotFoundPage} path="*" exact />
+      </Switch>
+    );
   }
-
-  return null;
 }

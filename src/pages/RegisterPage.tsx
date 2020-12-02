@@ -27,7 +27,7 @@ export default function Regsiter() {
       }
       window.Modal.hide();
     } catch (error) {
-      handleError(error, null, notification);
+      handleError(error, form, notification);
     }
   };
 
