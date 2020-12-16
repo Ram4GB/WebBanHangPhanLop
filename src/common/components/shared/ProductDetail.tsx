@@ -51,7 +51,7 @@ export default function ProductDetail(props: IProps) {
   return item ? (
     <Row gutter={12}>
       <Col style={{ overflow: "hidden" }} lg={14}>
-        <ZoomImage></ZoomImage>
+        <ZoomImage image={item.imageUrl}></ZoomImage>
         <p
           style={{
             textAlign: "center",

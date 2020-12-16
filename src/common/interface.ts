@@ -28,6 +28,7 @@ export interface IProduct {
   inStock: number;
   price: number;
   idString: string;
+  imageUrl: string;
 }
 
 export interface ICartProductItem extends IProduct {

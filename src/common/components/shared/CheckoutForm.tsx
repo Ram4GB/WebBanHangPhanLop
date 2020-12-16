@@ -71,7 +71,7 @@ export default function CheckoutForm(props: IProps) {
     for (let index = 0; index < comboCarts.length; index++) {
       orderDetails.push({
         amount: comboCarts[index].amount,
-        totalPrice: comboCarts[index].amount * carts[index].price,
+        totalPrice: comboCarts[index].amount * comboCarts[index].price,
         productId: null,
         comboId: comboCarts[index].id,
       });

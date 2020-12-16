@@ -107,7 +107,6 @@ export default function MainLayout(props: IProps) {
           .querySelectorAll(".ant-layout-header")[0]
           .classList.add("hide");
         setPreviousPositionScroll(current);
-
         // đợi khoảng 1s xuất hiện cái header
       } else {
         document
@@ -152,11 +151,19 @@ export default function MainLayout(props: IProps) {
     dispatch(toggleNavbarMobile());
   };
 
+  const isShowHeader = () => {
+    if (media && media.width < mobileWidth) {
+      return isShowNavbar ? "show" : "hide";
+    } else {
+      return "show";
+    }
+  };
+
   return (
     <Layout>
       <Layout className={`site-layout`}>
         <Header
-          className={`site-layout-background ${isShowNavbar ? "show" : "hide"}`}
+          className={`site-layout-background ${isShowHeader()}`}
           style={{ padding: "0px 20px", display: "flex", alignItems: "center" }}
           ref={contentRef}
         >

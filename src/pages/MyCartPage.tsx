@@ -11,12 +11,14 @@ import {
 } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import CheckoutForm from "../common/components/shared/CheckoutForm";
 import NumberFormat from "../common/components/shared/NumberFormat";
 import ProductDetail from "../common/components/shared/ProductDetail";
 import {
   largeFontSizeTitle,
   mediumFontSizeTitle,
+  rootImageAPI,
   vatPrice,
 } from "../common/config";
 import { IRootState } from "../modules";
@@ -26,7 +28,6 @@ import {
   updateCartAction,
   updateComboCartAction,
 } from "../modules/users/reducers";
-import productImage from "../common/assets/images/products/product.png";
 
 export default function MyCartPage() {
   const carts = useSelector((state: IRootState) => state.user.carts);
@@ -123,9 +124,9 @@ export default function MyCartPage() {
                   render: (value, record, index) => {
                     return (
                       <img
-                        style={{ width: 80, height: 80 }}
+                        style={{ width: 120, height: 80 }}
                         alt=""
-                        src={productImage}
+                        src={rootImageAPI + record.imageUrl}
                       />
                     );
                   },
@@ -213,8 +214,11 @@ export default function MyCartPage() {
                 },
                 {
                   title: "Tên Combo",
-                  dataIndex: "comboName",
-                  render: (value) => <p>{value}</p>,
+                  render: (record) => (
+                    <p>
+                      <Link to={"/combo/" + record.id}>{record.comboName}</Link>
+                    </p>
+                  ),
                 },
                 {
                   title: "Số lượng",

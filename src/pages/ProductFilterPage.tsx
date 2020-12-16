@@ -21,6 +21,7 @@ import {
   regularFontSizeTitle,
 } from "../common/config";
 import { ICategory } from "../common/interface";
+import { removeCharacter } from "../common/utils/convertCharacter";
 import handleError from "../common/utils/handleError";
 import { getComboList } from "../modules/combo/services";
 import { getCategoryList, getProductList } from "../modules/products/services";
@@ -35,7 +36,7 @@ export default function ProductFilterPage() {
 
   useEffect(() => {
     getData();
-    handleSubmitFilter(null);
+    handleSubmitFilter({ type: "product" });
   }, []);
 
   async function getData() {
@@ -67,12 +68,18 @@ export default function ProductFilterPage() {
 
       if (value) {
         if (value.productName) {
-          pTemp = pTemp.filter(
-            (item) => item.productName.indexOf(value.productName) !== -1
-          );
-          cTemp = cTemp.filter(
-            (item) => item.comboName.indexOf(value.productName) !== -1
-          );
+          pTemp = pTemp.filter((item) => {
+            let rmCharacter: string = removeCharacter(item.productName);
+            return (
+              rmCharacter.indexOf(removeCharacter(value.productName)) !== -1
+            );
+          });
+          cTemp = cTemp.filter((item) => {
+            let rmCharacter: string = removeCharacter(item.comboName);
+            return (
+              rmCharacter.indexOf(removeCharacter(value.productName)) !== -1
+            );
+          });
         }
 
         if (value.categories && value.categories.length > 0) {
@@ -110,8 +117,6 @@ export default function ProductFilterPage() {
     }
     setLoading(false);
   };
-
-  console.log(combinationArray);
 
   const handleChangePage = (value: any) => {
     setCurrentPage(value);
@@ -256,7 +261,7 @@ export default function ProductFilterPage() {
                 </Row>
                 <Form.Item
                   name="type"
-                  initialValue=""
+                  initialValue="product"
                   label={
                     <Typography.Title level={regularFontSizeTitle}>
                       Loại hình:

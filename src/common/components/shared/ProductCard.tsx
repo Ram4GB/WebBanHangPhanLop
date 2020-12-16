@@ -2,13 +2,12 @@ import { Button, Card, Col, notification, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../../../modules/users/reducers";
-import { mediumFontSizeTitle } from "../../config";
+import { mediumFontSizeTitle, rootImageAPI } from "../../config";
 import { IProduct } from "../../interface";
 import NumberFormat from "./NumberFormat";
 import ProductDetail from "../shared/ProductDetail";
 import { getProductByID } from "../../../modules/products/services";
 import handleError from "../../utils/handleError";
-import productImage from "../../assets/images/products/product.png";
 
 interface IProps {
   item: IProduct;
@@ -90,8 +89,10 @@ export default function ProductCard(props: IProps) {
       style={{ width: props.width, padding: "0px 15px", ...props.styles }}
     >
       <Card className="card-product">
-        <img src={productImage} alt="" />
-        <div className="card-product__title">{item.productName}</div>
+        <img src={`${rootImageAPI}${item.imageUrl}`} alt="" />
+        <div title={item.productName} className="card-product__title">
+          {item.productName}
+        </div>
         <div className="card-product__price">
           <NumberFormat value={item.price}></NumberFormat>
         </div>

@@ -8,6 +8,7 @@ import HomePage from "../../pages/HomePage";
 import MyCartPage from "../../pages/MyCartPage";
 import NotFoundPage from "../../pages/NotFoundPage";
 import ProductFilterPage from "../../pages/ProductFilterPage";
+import StaticsOrderPage from "../../pages/StaticsOrderPage";
 import UserOrderPage from "../../pages/UserOrderPage";
 import UserPage from "../../pages/UserPage";
 
@@ -28,6 +29,7 @@ export default function Routes() {
           path="/me/change-password"
           exact
         />
+        <Route component={StaticsOrderPage} path="/me/statitics-order" exact />
         <Route component={NotFoundPage} path="*" exact />
       </Switch>
     );

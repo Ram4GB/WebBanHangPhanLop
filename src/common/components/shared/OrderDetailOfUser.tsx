@@ -1,12 +1,15 @@
-import { Descriptions, notification, Table, Typography } from "antd";
+import { Descriptions, notification, Steps, Table, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+
 import { getOrderDetail } from "../../../modules/users/services";
-import { mediumFontSizeTitle, regularFontSizeTitle } from "../../config";
+import {
+  mediumFontSizeTitle,
+  regularFontSizeTitle,
+  rootImageAPI,
+} from "../../config";
 import handleError from "../../utils/handleError";
 import DateFormat from "./DateFormat";
 import NumberFormat from "./NumberFormat";
-import StatusOrder from "./StatusOrder";
-import productImage from "../../assets/images/products/product.png";
 
 interface IProps {
   orderID: string;
@@ -44,6 +47,42 @@ export default function OrderDetailOfUser(props: IProps) {
     init();
   }, [props.orderID]);
 
+  const renderTimeLine = () => {
+    console.log(order.status);
+
+    switch (order.status) {
+      case "New":
+        return (
+          <Steps current={0}>
+            <Steps.Step title={"Đặt hàng đang xử lý"}></Steps.Step>
+            <Steps.Step title={"Giao hàng"}></Steps.Step>
+          </Steps>
+        );
+      case "Accepted":
+        return (
+          <Steps current={1}>
+            <Steps.Step title={"Đặt hàng thành công"}></Steps.Step>
+            <Steps.Step
+              status="process"
+              title={"Giao hàng thành công"}
+            ></Steps.Step>
+          </Steps>
+        );
+      case "Refused":
+        return (
+          <Steps current={1}>
+            <Steps.Step title={"Đặt hàng"}></Steps.Step>
+            <Steps.Step
+              status="error"
+              title={"Giao hàng không thành công"}
+            ></Steps.Step>
+          </Steps>
+        );
+    }
+
+    return null;
+  };
+
   return order ? (
     <div>
       <Typography.Title level={regularFontSizeTitle}>
@@ -53,9 +92,6 @@ export default function OrderDetailOfUser(props: IProps) {
         <Descriptions.Item label="Mã đơn hàng">
           {order.idString}
         </Descriptions.Item>
-        <Descriptions.Item label="Tình trạng">
-          <StatusOrder status={order.status}></StatusOrder>
-        </Descriptions.Item>
         <Descriptions.Item label="Ngày đặt">
           <DateFormat date={order.createdAt}></DateFormat>
         </Descriptions.Item>
@@ -63,6 +99,15 @@ export default function OrderDetailOfUser(props: IProps) {
           <DateFormat date={order.deliveryDate}></DateFormat>
         </Descriptions.Item>
       </Descriptions>
+
+      {order ? (
+        <React.Fragment>
+          <Typography.Title level={mediumFontSizeTitle}>
+            Trạng thái
+          </Typography.Title>
+          <div className="py-3">{renderTimeLine()}</div>
+        </React.Fragment>
+      ) : null}
 
       {order.products.length > 0 && (
         <>
@@ -87,9 +132,9 @@ export default function OrderDetailOfUser(props: IProps) {
                 render: (value, record, index) => {
                   return (
                     <img
-                      style={{ width: 80, height: 80 }}
+                      style={{ width: 120, height: 80 }}
                       alt=""
-                      src={productImage}
+                      src={rootImageAPI + record.imageUrl}
                     />
                   );
                 },
@@ -103,7 +148,7 @@ export default function OrderDetailOfUser(props: IProps) {
                 align: "center",
                 dataIndex: "amount",
                 render: (value) => {
-                  return <NumberFormat value={value}></NumberFormat>;
+                  return value;
                 },
               },
               {

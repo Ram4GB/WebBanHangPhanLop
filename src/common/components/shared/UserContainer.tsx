@@ -18,6 +18,9 @@ export default function UserContainer(props: IProps) {
               <Link to="/me/order">
                 <li className="user-menu__item">2. Đơn hàng của bạn</li>
               </Link>
+              {/* <Link to="/me/statitics-order">
+                <li className="user-menu__item">4. Thống kê</li>
+              </Link> */}
               <Link to="/me/change-password">
                 <li className="user-menu__item">3. Đổi mật khẩu</li>
               </Link>

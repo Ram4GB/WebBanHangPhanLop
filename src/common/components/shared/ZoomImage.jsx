@@ -1,8 +1,8 @@
 import React from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import productImage from "../../assets/images/products/product.png";
+import { rootImageAPI } from "../../config";
 
-export default function ZoomImage() {
+export default function ZoomImage(props) {
   return (
     <TransformWrapper>
       <TransformComponent>
@@ -10,7 +10,7 @@ export default function ZoomImage() {
           style={{
             width: 500,
           }}
-          src={productImage}
+          src={rootImageAPI + props.image}
           alt="test"
         />
       </TransformComponent>

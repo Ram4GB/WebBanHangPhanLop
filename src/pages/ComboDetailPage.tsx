@@ -10,7 +10,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import NumberFormat from "../common/components/shared/NumberFormat";
-import { largeFontSizeTitle, mediumFontSizeTitle } from "../common/config";
+import {
+  largeFontSizeTitle,
+  mediumFontSizeTitle,
+  rootImageAPI,
+} from "../common/config";
 import { ICombo } from "../common/interface";
 import handleError from "../common/utils/handleError";
 import { getComboByID } from "../modules/combo/services";
@@ -18,7 +22,6 @@ import ProductDetail from "../common/components/shared/ProductDetail";
 import TagInStock from "../common/components/shared/TagInStock";
 import { useDispatch } from "react-redux";
 import { addComboToCartAction } from "../modules/users/reducers";
-import productImage from "../common/assets/images/products/product.png";
 
 interface IProps {
   comboID: any;
@@ -161,12 +164,12 @@ export default function ComboDetailPage(props: IProps) {
                 {
                   title: "Hình ảnh",
                   width: 200,
-                  render: (value, record, index) => {
+                  render: (record) => {
                     return (
                       <img
                         style={{ width: 80, height: 80 }}
                         alt=""
-                        src={productImage}
+                        src={rootImageAPI + record.imageUrl}
                       />
                     );
                   },
